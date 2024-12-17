@@ -1,0 +1,5 @@
+---
+- name: restart quorum
+  systemd:
+    name: quorum.service
+    state: restarted

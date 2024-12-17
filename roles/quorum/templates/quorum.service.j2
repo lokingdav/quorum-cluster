@@ -1,0 +1,17 @@
+[Unit]
+Description=Quorum Node
+After=network.target
+
+[Service]
+User=root
+ExecStart={{ quorum_install_dir }}/geth --datadir {{ quorum_data_dir }} \
+  --networkid {{ quorum_network_id }} \
+  --syncmode full \
+  --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,net,web3,istanbul \
+  --allow-insecure-unlock \
+  {% if node_role == 'validator' %}--mine --unlock 0 --password {{ quorum_data_dir }}/keystore/password{% endif %} \
+  --verbosity 3
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

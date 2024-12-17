@@ -1,0 +1,30 @@
+---
+- name: Copy genesis.json
+  copy:
+    src: "genesis.json"
+    dest: "{{ quorum_data_dir }}/genesis.json"
+    mode: '0644'
+
+- name: Copy static-nodes.json
+  copy:
+    src: "static-nodes.json"
+    dest: "{{ quorum_data_dir }}/static-nodes.json"
+    mode: '0644'
+
+- name: Copy nodekey
+  copy:
+    src: "{{ node_dir }}/nodekey"
+    dest: "{{ quorum_data_dir }}/nodekey"
+    mode: '0600'
+
+- name: Copy account keystore file
+  copy:
+    src: "{{ node_dir }}/keystore/accountKeystore"
+    dest: "{{ quorum_data_dir }}/keystore/keyfile"
+    mode: '0600'
+
+- name: Copy account password file
+  copy:
+    src: "{{ node_dir }}/keystore/accountPassword"
+    dest: "{{ quorum_data_dir }}/keystore/password"
+    mode: '0600'

@@ -1,0 +1,5 @@
+---
+# main.yml includes other task files
+- include_tasks: install.yml
+- include_tasks: configure.yml
+- include_tasks: run.yml

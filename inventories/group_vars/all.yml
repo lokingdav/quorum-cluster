@@ -1,0 +1,4 @@
+quorum_install_dir: "/opt/quorum"
+quorum_data_dir: "/opt/quorum/data"
+quorum_binary_url: "https://artifacts.consensys.net/public/go-quorum/raw/versions/v24.4.1/geth_v24.4.1_linux_amd64.tar.gz"
+quorum_network_id: 1337

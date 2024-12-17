@@ -1,0 +1,17 @@
+---
+- name: Initialize the genesis block
+  command: "{{ quorum_install_dir }}/geth --datadir {{ quorum_data_dir }} init {{ quorum_data_dir }}/genesis.json"
+  args:
+    creates: "{{ quorum_data_dir }}/geth/chaindata"
+
+- name: Install systemd service
+  template:
+    src: quorum.service.j2
+    dest: /etc/systemd/system/quorum.service
+    mode: '0644'
+
+- name: Enable and start quorum service
+  systemd:
+    name: quorum.service
+    enabled: yes
+    state: started

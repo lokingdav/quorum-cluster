@@ -1,0 +1,31 @@
+---
+- name: Ensure directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - "{{ quorum_install_dir }}"
+    - "{{ quorum_data_dir }}"
+    - "{{ quorum_data_dir }}/keystore"
+
+- name: Download Quorum binary tarball
+  get_url:
+    url: "{{ quorum_binary_url }}"
+    dest: "/tmp/quorum.tar.gz"
+    mode: '0644'
+
+- name: Extract Quorum binary
+  unarchive:
+    src: "/tmp/quorum.tar.gz"
+    dest: "{{ quorum_install_dir }}"
+    remote_src: yes
+    mode: '0755'
+  
+- name: Check quorum binary
+  stat:
+    path: "{{ quorum_install_dir }}/geth"
+  register: quorum_binary_stat
+  failed_when: not quorum_binary_stat.stat.exists
