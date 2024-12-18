@@ -1,2 +1,2 @@
 # Quorum Setup with N nodes
-Todo...
+Make sure you change the IP address  of the nodes in ```inventories/hosts.yml```.
